@@ -1,28 +1,21 @@
 package com.rasel.myapplication
 
-import android.text.method.TextKeyListener.clear
-import java.nio.file.Files.delete
-import androidx.core.content.ContextCompat
-import android.graphics.Typeface
-import android.R.id.message
 import android.content.Context
-import androidx.core.view.ViewCompat.setRotationY
-import androidx.core.view.ViewCompat.getRotationY
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.Glide
+import android.graphics.Typeface
 import android.text.TextUtils
-import android.view.HapticFeedbackConstants
-import android.view.View.OnLongClickListener
-import androidx.core.view.ViewCompat.setActivated
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.util.SparseBooleanArray
+import android.view.HapticFeedbackConstants
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
 class MessagesAdapter(
@@ -134,22 +127,21 @@ class MessagesAdapter(
             }
 
 
-        holder.messageContainer.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(view: View): Boolean {
-                listener.onRowLongClicked(position)
-                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                return true
-            }
-        })
+        holder.messageContainer.setOnLongClickListener { view ->
+            listener.onRowLongClicked(position)
+            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+            true
+        }
     }
 
     private fun applyProfilePicture(holder: MyViewHolder, message: Message) {
         if (!TextUtils.isEmpty(message.picture)) {
             Glide.with(mContext).load(message.picture)
                 .thumbnail(0.5f)
-                .transform(CircleTransform(mContext))
+                .transform(CircleTransform())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imgProfile)
+
             holder.imgProfile.setColorFilter(null)
             holder.iconText.visibility = View.GONE
         } else {
@@ -189,8 +181,8 @@ class MessagesAdapter(
     // As the views will be reused, sometimes the icon appears as
     // flipped because older view is reused. Reset the Y-axis to 0
     private fun resetIconYAxis(view: View) {
-        if (view.getRotationY() !== 0f) {
-            view.setRotationY(0f)
+        if (view.rotationY !== 0f) {
+            view.rotationY = 0f
         }
     }
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_list_row"
     android:clickable="true"
     android:focusable="true"
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
+            tools:text="from user rasel"
             android:textColor="@color/from"
             android:textSize="@dimen/msg_text_primary"
             android:textStyle="bold" />
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
+            tools:text="Subject of the mail"
             android:textColor="@color/subject"
             android:textSize="@dimen/msg_text_secondary"
             android:textStyle="bold" />
@@ -46,6 +49,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
+            tools:text="Body of the mail. This is were it gots messey for everyone"
             android:textColor="@color/message"
             android:textSize="@dimen/msg_text_secondary" />
 
